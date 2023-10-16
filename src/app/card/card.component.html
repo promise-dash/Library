@@ -1,0 +1,8 @@
+<div class="card shadow" style="width: 13rem; height: fit-content;">
+    <img [src]="book.image" class="card-img-top" alt="..." style="height: 13rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{book.title.substring(0, 17)}}</h5>
+      <p class="card-text">{{book.summary.substring(0, 50) + "..."}}</p>
+      <button class="btn btn-primary" (click)="handleClick(book)">{{'€ '+ book.price.value}}</button>
+    </div>
+</div>
