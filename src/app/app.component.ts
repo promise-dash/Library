@@ -22,7 +22,7 @@ export class AppComponent {
     this.bookService.getBooksData().subscribe((data: any) => {
       this.books = data.books;
       this.searchedBooks = data.books;
-      console.log(this.books);
+      // console.log(this.books);
     });
   }
 
@@ -44,7 +44,18 @@ export class AppComponent {
     this.totalPrice -= book.data.price.value * book.freq;
   }
 
-  getSerachedBook(inputTerm: string){
+  descFreq(book:  any){
+    const idx = this.cart.findIndex(item => item.data === book.data);
+    if(this.cart[idx].freq > 1){
+      this.cart[idx].freq --;
+      this.totalPrice -= book.data.price.value;
+    }
+    else{
+      this.removeFromCart(book);
+    }
+  }
+
+  getSearchedBook(inputTerm: string){
     
     const term = inputTerm.toLowerCase();
     this.searchedBooks = this.books.filter((book) => {
