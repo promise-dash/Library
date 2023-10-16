@@ -14,7 +14,7 @@ export class NavComponent {
     searchInput: new FormControl('')
   });
 
-  onChange(){
+  onChange(): void {
     // console.log(this.searchForm.value.searchInput);
     this.filterBook.emit(this.searchForm.value.searchInput!);
   }

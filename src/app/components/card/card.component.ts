@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Book } from 'src/app/models/book';
 
 @Component({
   selector: 'app-card',
@@ -7,11 +8,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CardComponent {
 
-  @Input() book: any;
-  @Output() addBook: EventEmitter<Event> = new EventEmitter();
+  @Input() book: Book;
+  @Output() addBook: EventEmitter<Book> = new EventEmitter();
   
   
-  handleClick(book: Event){
+  handleClick(book: Book){
     this.addBook.emit(book);
   }
 }

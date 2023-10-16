@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BookDataService } from './services/book-data.service';
+import { CartItem } from './models/cart-item';
+import { Book } from './models/book';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,10 @@ import { BookDataService } from './services/book-data.service';
 export class AppComponent {
   title = 'library';
 
-  books: any[] = [];
-  cart: {data: any, freq: number}[] = [];
+  books: Book[]=[];
+  cart: CartItem[]=[];
   totalPrice: number = 0;
-  searchedBooks: any[] = [];
+  searchedBooks: Book[];
 
   constructor(private bookService: BookDataService){
       this.fetchBooksData(bookService);
@@ -26,8 +28,7 @@ export class AppComponent {
     });
   }
 
-  addBook(book: any){
-
+  addBook(book: Book){
     const idx = this.cart.findIndex(item => item.data === book);
 
     if(idx === -1){
@@ -38,13 +39,13 @@ export class AppComponent {
     this.totalPrice += book.price.value;
   }
 
-  removeFromCart(book: any){
+  removeFromCart(book: CartItem){
     const idx = this.cart.findIndex(item => item.data === book.data);
     this.cart.splice(idx, 1);
     this.totalPrice -= book.data.price.value * book.freq;
   }
 
-  descFreq(book:  any){
+  descFreq(book:  CartItem){
     const idx = this.cart.findIndex(item => item.data === book.data);
     if(this.cart[idx].freq > 1){
       this.cart[idx].freq --;
